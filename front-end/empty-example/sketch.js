@@ -1,16 +1,18 @@
 
 var canvas;
 var labels= ["name", "week 1", "week 2", "week 3"];
+var tester= ["David", 0,0,0];
+var textGrid= [labels, tester];
 
 class Grid{
   constructor (){
     this.grid=[];
 
-    for (var i = 0; i < 4; i++){
-      for (var j=0; j<6; j++){
+    for (var i = 0; i < 6; i++){
+      for (var j=0; j<4; j++){
         fill(255, 255, 255);
         // rectMode(CENTER); center the single digit numbers later!!
-        var gridChecks = new Box(75+i*200, 200+j*75, 200, 75);
+        var gridChecks = new Box(75+j*200, 200+i*75, 200, 75);
         this.grid.push(gridChecks);
       }
 
@@ -29,11 +31,11 @@ class Box{
     rect(x,y,width, height);
   }
 
-  get_boxDim(){
-    return [this.width, this.height];
+  getWidth(){
+    return this.width;
   }
-  get_boxCoord(){
-    return [this.x,this.y];
+  getHeight(){
+    return this.height;
   }
 
 }
@@ -54,13 +56,19 @@ function draw() {
 
   grid= new Grid();
 
-  for (var i = 0; i < 4; i=i+1){
-    //fill(255, 255, 255);
-    // rectMode(CENTER); center the single digit numbers later!!
-    //rect(75+i*75, 200, 75, 75);
-    fill(0, 0, 0);
-    textSize(30);
-    text(labels[i], 77.5+ 200*i , 255);
+  for (var i = 0; i < 6; i++){
+    for (var j=0; j<4; j++){
+      fill(0, 0, 0);
+      if (i==0){
+        textSize(30);
+      }
+      else{
+        textSize(20);
+      }
+
+      text(textGrid[i][j], 77.5+ 200*j , 255+ 75*i);
+    }
+
   }
 
 
@@ -72,12 +80,4 @@ window.onresize = function() {
   canvas.size(w,h);
   width = w;
   height = h;
-}
-
-function createNums(){
-  var nums= [];
-  for (var i=0; i<12; i=i+1){
-    nums.push(int(random()*100));
-  }
-  return nums;
 }
