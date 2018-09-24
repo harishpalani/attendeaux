@@ -12,7 +12,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        results_template = JINJA_ENVIRONMENT.get_template('templates/index.html')
+        results_template = JINJA_ENVIRONMENT.get_template('templates/test.html')
         self.response.out.write(results_template.render())
 
 app = webapp2.WSGIApplication([
