@@ -25,7 +25,7 @@
 // pin #3 is OUT from arduino  (WHITE wire)
 // comment these two lines if using hardware serial
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(2, 3);
+SoftwareSerial mySerial(11, 10);
 
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
 
@@ -36,13 +36,13 @@ void setup()
   Serial.begin(9600);
   while (!Serial);  // For Yun/Leo/Micro/Zero/...
   delay(100);
-  Serial.println("\n\nAdafruit Fingerprint sensor enrollment");
+  Serial.println("\n\nWelcome to Attendeaux!");
 
   // set the data rate for the sensor serial port
   finger.begin(57600);
   
   if (finger.verifyPassword()) {
-    Serial.println("Found fingerprint sensor!");
+    Serial.println("Fingerprint sensor ready!");
   } else {
     Serial.println("Did not find fingerprint sensor :(");
     while (1) { delay(1); }
@@ -61,7 +61,7 @@ uint8_t readnumber(void) {
 
 void loop()                     // run over and over again
 {
-  Serial.println("Ready to enroll a fingerprint!");
+  Serial.println("Ready to enroll your fingerprint!");
   Serial.println("Please type in the ID # (from 1 to 127) you want to save this finger as...");
   id = readnumber();
   if (id == 0) {// ID #0 not allowed, try again!
